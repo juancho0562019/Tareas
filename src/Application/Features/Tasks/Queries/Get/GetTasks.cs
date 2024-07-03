@@ -34,6 +34,7 @@ namespace Application.Features.Tasks.Queries.Get
                         Description = t.Description,
                         BeginDate = t.BeginDate,
                         EndDate = t.EndDate,
+                        SpentTime = ((t.EndDate ?? DateTime.UtcNow) - t.BeginDate).TotalHours
                     }).ToList() ?? default
                 });
             }

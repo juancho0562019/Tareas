@@ -1,4 +1,10 @@
-﻿namespace Application.Features.Tasks
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Application.Features.Tasks
 {
     public class TaskDto
     {
@@ -19,6 +25,7 @@
         public string Description { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public int SpentTime { get; set; }
+        public double SpentTime { get; set; }
     }
+
 }

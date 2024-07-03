@@ -33,6 +33,7 @@ namespace Infrastructure
             services.AddScoped<ApplicationDbContextInitialiser>();
 
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ITimeRepository, TimeRepository>();
             services.AddSingleton(TimeProvider.System);
         
 

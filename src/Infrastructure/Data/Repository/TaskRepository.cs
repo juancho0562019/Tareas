@@ -31,5 +31,18 @@ namespace Infrastructure.Data.Repository
             await _context.SaveChangesAsync(new CancellationToken());
             
         }
+
+        public async Task<Domain.Entities.Task?> GetTaskWithTimesByIdAsync(Guid taskId)
+        {
+            return await _context.Tasks
+                .Include(t => t.Times)
+                .FirstOrDefaultAsync(t => t.Id == taskId);
+        }
+
+        public async Task<Domain.Entities.Task?> GetTaskByIdAsync(Guid taskId)
+        {
+            return await _context.Tasks
+                .FirstOrDefaultAsync(t => t.Id == taskId);
+        }
     }
 }
