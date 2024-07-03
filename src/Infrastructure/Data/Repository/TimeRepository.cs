@@ -14,10 +14,19 @@ namespace Infrastructure.Data.Repository
         {
             _context = context;
         }
-
+        public async System.Threading.Tasks.Task<Time> GetTimeByIdAsync(Guid timeId)
+        {
+            return await _context.Times.FindAsync(timeId);
+        }
         public async System.Threading.Tasks.Task AddTimeAsync(Time time)
         {
             await _context.Times.AddAsync(time);
+            await _context.SaveChangesAsync(CancellationToken.None);
+        }
+
+        public async System.Threading.Tasks.Task UpdateTimeAsync(Time time)
+        {
+            _context.Times.Update(time);
             await _context.SaveChangesAsync(CancellationToken.None);
         }
     }

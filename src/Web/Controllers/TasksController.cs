@@ -2,7 +2,9 @@
 using Application.Features.Tasks.Commands.Create;
 using Application.Features.Tasks.Queries.Get;
 using Application.Features.Tasks.Queries.GetTasksTimes;
+using Application.Features.Times.Commands;
 using Application.Features.Times.Commands.Create;
+using Application.Features.Times.Commands.Update;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
@@ -54,8 +56,17 @@ namespace Web.Controllers
         public async Task<IActionResult> CreateTime(string id, [FromBody] CreateTimeCommand command)
         {
             command.TaskId = id;
-            var timeDto = await base.Command<CreateTimeCommand, CreateTimeDto>(command);
+            var timeDto = await base.Command<CreateTimeCommand, ResponseTimeDto>(command);
             return CreatedAtAction(nameof(GetTaskTimes), new { id = command.TaskId }, timeDto);
+        }
+
+        [HttpPut("{taskId}/times/{timeId}")]
+        public async Task<IActionResult> UpdateTime(string taskId, string timeId, [FromBody] UpdateTimeCommand command)
+        {
+            command.TaskId = taskId;
+            command.TimeId = timeId;
+            var timeDto = await base.Command<UpdateTimeCommand, ResponseTimeDto>(command);
+            return Ok(timeDto);
         }
     }
 }
